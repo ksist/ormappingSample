@@ -6,7 +6,7 @@
 package ksist.ormapping.sample;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 import lombok.Data;
 
 /**
@@ -36,8 +36,8 @@ public abstract class Book implements Serializable {
      * 発送を予約する
      * @return 発送予定日
      */
-    public Date reserveShipping() {
-        Date shippingDate = this.calcShippingDate();
+    public Calendar reserveShipping() {
+        Calendar shippingDate = this.calcShippingDate();
         if (this.hasStock()) {
             this.stockCount--;
         }
@@ -48,6 +48,6 @@ public abstract class Book implements Serializable {
      * 発送予定日を計算する（計算ロジックはサブクラス側で実装）
      * @return 発送予定日
      */
-    public abstract Date calcShippingDate();
+    public abstract Calendar calcShippingDate();
         
 }

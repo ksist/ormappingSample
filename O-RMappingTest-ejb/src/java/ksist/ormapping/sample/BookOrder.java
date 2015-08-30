@@ -6,7 +6,7 @@
 package ksist.ormapping.sample;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 import lombok.Data;
 
@@ -23,7 +23,7 @@ public class BookOrder implements Serializable {
     private String customerName;
     
     // 注文日
-    private Date orderDate;
+    private Calendar orderDate;
     
     // 注文明細
     private List<BookOrderItem> items;
