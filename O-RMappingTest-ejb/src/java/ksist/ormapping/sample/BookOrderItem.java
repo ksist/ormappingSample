@@ -7,6 +7,21 @@ package ksist.ormapping.sample;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 import lombok.Data;
 
 /**
@@ -14,13 +29,49 @@ import lombok.Data;
  * @author kasai
  */
 @Data
+@Entity
+@Table(name = "BOOK_ORDER_ITEM")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "BookOrderItem.findAll", query = "SELECT b FROM BookOrderItem b"),
+    @NamedQuery(name = "BookOrderItem.findByBookOrderItemId", query = "SELECT b FROM BookOrderItem b WHERE b.bookOrderItemId = :bookOrderItemId"),
+    @NamedQuery(name = "BookOrderItem.findByBookOrderId", query = "SELECT b FROM BookOrderItem b WHERE b.bookOrderId = :bookOrderId"),
+    @NamedQuery(name = "BookOrderItem.findByItemOrder", query = "SELECT b FROM BookOrderItem b WHERE b.itemOrder = :itemOrder"),
+    @NamedQuery(name = "BookOrderItem.findByBookId", query = "SELECT b FROM BookOrderItem b WHERE b.bookId = :bookId"),
+    @NamedQuery(name = "BookOrderItem.findByShippingDate", query = "SELECT b FROM BookOrderItem b WHERE b.shippingDate = :shippingDate")})
+
 public class BookOrderItem implements Serializable {
+    private static final long serialVersionUID = 1L;
     // 注文明細ID
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "BOOK_ORDER_ITEM_ID")
     private int id;
     
     // 発送予定日
+    @Column(name = "SHIPPING_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
     private Calendar shippingDate;
     
     // 書籍
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "BOOK_ID")
     private Book book;
+    
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof BookOrderItem)) {
+            return false;
+        }
+        BookOrderItem other = (BookOrderItem) object;
+        return this.id == other.id;
+    }
+
 }
