@@ -3,14 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ksist.ormapping.sample;
+package ksist.ormapping.sample.entity;
 
 import java.util.Calendar;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * 和書クラス
  * @author kasai
  */
+@Entity
+@DiscriminatorValue("JAPANESE")
 public class JapaneseBook extends Book {
 
     /**

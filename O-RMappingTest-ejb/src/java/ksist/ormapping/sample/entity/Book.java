@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ksist.ormapping.sample;
+package ksist.ormapping.sample.entity;
 
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
@@ -27,15 +28,15 @@ import lombok.Data;
 @Table(name = "BOOK")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Book.findAll", query = "SELECT b FROM Book b"),
-    @NamedQuery(name = "Book.findByBookId", query = "SELECT b FROM Book b WHERE b.bookId = :bookId"),
-    @NamedQuery(name = "Book.findByBookType", query = "SELECT b FROM Book b WHERE b.bookType = :bookType"),
-    @NamedQuery(name = "Book.findByBookName", query = "SELECT b FROM Book b WHERE b.bookName = :bookName"),
-    @NamedQuery(name = "Book.findByStockCount", query = "SELECT b FROM Book b WHERE b.stockCount = :stockCount")})
+    @NamedQuery(name = "Book.findAll", query = "SELECT b FROM Book b")
+})
 
+@DiscriminatorColumn(name = "BOOK_TYPE")
 @Data
 public abstract class Book implements Serializable {
-
+    private static final long serialVersionUID = 1L;
+    
+    // 書籍ID
     @Id
     @Basic(optional = false)
     @NotNull

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ksist.ormapping.sample;
+package ksist.ormapping.sample.entity;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -33,13 +33,12 @@ import lombok.Data;
 @Table(name = "BOOK_ORDER")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "BookOrder.findAll", query = "SELECT b FROM BookOrder b"),
-    @NamedQuery(name = "BookOrder.findByBookOrderId", query = "SELECT b FROM BookOrder b WHERE b.bookOrderId = :bookOrderId"),
-    @NamedQuery(name = "BookOrder.findByCustomerName", query = "SELECT b FROM BookOrder b WHERE b.customerName = :customerName"),
-    @NamedQuery(name = "BookOrder.findByOrderDate", query = "SELECT b FROM BookOrder b WHERE b.orderDate = :orderDate")})
+    @NamedQuery(name = "BookOrder.findAll", query = "SELECT b FROM BookOrder b")
+})
 
 @Data
 public class BookOrder implements Serializable {
+    private static final long serialVersionUID = 1L;
     // 注文ID
     @Id
     @Basic(optional = false)
@@ -59,7 +58,7 @@ public class BookOrder implements Serializable {
     
     // 注文明細
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "BOOK_ORDER_ITEM_ID")
+    @JoinColumn(name = "BOOK_ORDER_ID")
     private List<BookOrderItem> items;
         
     @Override
