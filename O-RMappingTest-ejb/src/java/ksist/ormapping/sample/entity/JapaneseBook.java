@@ -32,5 +32,10 @@ public class JapaneseBook extends Book {
             return date;
         }
     }
+
+    @Override
+    public String getType() {
+        return "和書";
+    }
     
 }

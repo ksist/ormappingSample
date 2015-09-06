@@ -32,5 +32,10 @@ public class ForeignBook extends Book {
             return today;
         }
     }
+
+    @Override
+    public String getType() {
+        return "洋書";
+    }
     
 }
