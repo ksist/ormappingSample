@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -38,6 +40,7 @@ public abstract class Book implements Serializable {
     
     // 書籍ID
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "BOOK_ID")
@@ -77,5 +80,11 @@ public abstract class Book implements Serializable {
      * @return 発送予定日
      */
     public abstract Calendar calcShippingDate();
-        
+    
+    /**
+     * 書籍の種類を返す（サブクラス側で実装）
+     * @return 書籍の種類
+     */
+    public abstract String getType();
+    
 }
