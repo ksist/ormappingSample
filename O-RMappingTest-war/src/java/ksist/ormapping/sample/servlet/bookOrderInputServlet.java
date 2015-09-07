@@ -44,7 +44,23 @@ public class bookOrderInputServlet extends HttpServlet {
         
         List<Book> list = bean.findAll();
         
+        String bookList[] = request.getParameterValues("bookList");
+        
         HttpSession session = request.getSession();
+
+        if ("delete".equals(request.getParameter("doAction"))) {
+            String tempBookList[] = new String[bookList.length - 1];
+            int tempIdx = 0;
+            for (int i = 0; i < bookList.length; i++) {
+                if (i != Integer.parseInt(request.getParameter("index"))) {
+                    tempBookList[tempIdx] = bookList[i];
+                    tempIdx++;
+                }
+            }
+            session.setAttribute("bookList", tempBookList);
+        } else if ("add".equals(request.getParameter("doAction"))) {
+            session.setAttribute("bookList", bookList);
+        }
         session.setAttribute("books", list);
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/bookOrder.jsp");
