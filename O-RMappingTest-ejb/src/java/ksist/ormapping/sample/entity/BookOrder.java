@@ -9,14 +9,18 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -41,12 +45,13 @@ public class BookOrder implements Serializable {
     private static final long serialVersionUID = 1L;
     // 注文ID
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "BOOK_ORDER_ID")
     private int id;
 
-    // 注文書
+    // 注文者
     @Size(max = 16)
     @Column(name = "CUSTOMER_NAME")
     private String customerName;
@@ -57,8 +62,9 @@ public class BookOrder implements Serializable {
     private Calendar orderDate;
     
     // 注文明細
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "BOOK_ORDER_ID")
+    @OrderColumn(name = "ITEM_ORDER")
     private List<BookOrderItem> items;
         
     @Override
