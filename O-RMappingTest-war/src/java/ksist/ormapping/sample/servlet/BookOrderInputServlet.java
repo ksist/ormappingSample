@@ -14,7 +14,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import ksist.ormapping.sample.BookSessionBean;
 import ksist.ormapping.sample.entity.Book;
 
@@ -44,9 +43,9 @@ public class BookOrderInputServlet extends HttpServlet {
         List<Book> list = bean.findAll();
         
         String bookList[] = request.getParameterValues("bookList");
+        String customerName = request.getParameter("customerName");
+        request.setAttribute("customerName", customerName);
         
-        HttpSession session = request.getSession();
-
         if ("delete".equals(request.getParameter("doAction"))) {
             String tempBookList[] = new String[bookList.length - 2];
             int tempIdx = 0;
@@ -57,14 +56,14 @@ public class BookOrderInputServlet extends HttpServlet {
                 }
             }
             if (tempBookList.length == 0) {
-                session.setAttribute("bookList", null);
+                request.setAttribute("bookList", null);
             } else {
-                session.setAttribute("bookList", tempBookList);
+                request.setAttribute("bookList", tempBookList);
             }
         } else if ("add".equals(request.getParameter("doAction"))) {
-            session.setAttribute("bookList", bookList);
+            request.setAttribute("bookList", bookList);
         }
-        session.setAttribute("books", list);
+        request.setAttribute("books", list);
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/bookOrder.jsp");
         dispatcher.forward(request, response);

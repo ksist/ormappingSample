@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ksist.ormapping.sample.BookOrderSessoinBean;
+import ksist.ormapping.sample.entity.BookOrder;
 
 /**
  *
@@ -48,7 +49,9 @@ public class BookOrderServlet extends HttpServlet {
             bookIDs.add(Integer.parseInt(bookID));
         }
         
-        bean.createBookOrder(customerName, bookIDs);
+        BookOrder order = bean.createBookOrder(customerName, bookIDs);
+        
+        request.setAttribute("order", order);
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/bookOrderFinish.jsp");
         dispatcher.forward(request, response);

@@ -29,7 +29,7 @@
         <h1>書籍注文ページ</h1>
         <form action="bookOrder" name="form" method="POST">
             注文者
-            <input type="text" name="customerName" />
+            <input type="text" name="customerName" value="${customerName}"/>
             <p>注文リスト</p>
             <table border="1">
                 <tr>
