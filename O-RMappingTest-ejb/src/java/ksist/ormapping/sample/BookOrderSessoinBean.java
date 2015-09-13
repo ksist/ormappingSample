@@ -7,6 +7,7 @@ package ksist.ormapping.sample;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
@@ -33,7 +34,7 @@ public class BookOrderSessoinBean {
         // 注文の作成
         bookOrder = new BookOrder();
         bookOrder.setCustomerName(customerName);
-        bookOrder.setOrderDate(Calendar.getInstance());
+        bookOrder.setOrderDate(Calendar.getInstance().getTime());
 
         // 注文明細リストの作成
         List<BookOrderItem> bookOrderItems = new ArrayList<>();
@@ -43,7 +44,7 @@ public class BookOrderSessoinBean {
 
             // 発送予定日を取得し、書籍の在庫を減らす
             // 注) トランザクションが終了すると書籍の在庫の減少も自動的に保存される
-            Calendar shippingDate = book.reserveShipping();
+            Date shippingDate = book.reserveShipping();
 
             // 注文明細を作成する
             BookOrderItem bookOrderItem = new BookOrderItem();

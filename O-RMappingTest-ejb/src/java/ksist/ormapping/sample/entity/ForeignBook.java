@@ -6,6 +6,7 @@
 package ksist.ormapping.sample.entity;
 
 import java.util.Calendar;
+import java.util.Date;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -22,14 +23,14 @@ public class ForeignBook extends Book {
      * @return 在庫があれば３日後、なければ７日後に発送する
      */
     @Override
-    public Calendar calcShippingDate() {
+    public Date calcShippingDate() {
         Calendar today = Calendar.getInstance();
         if (this.hasStock()) {
             today.add(Calendar.DATE, 3);
-            return today;
+            return today.getTime();
         } else {
             today.add(Calendar.DATE, 7);
-            return today;
+            return today.getTime();
         }
     }
 

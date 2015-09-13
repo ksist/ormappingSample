@@ -7,6 +7,7 @@ package ksist.ormapping.sample.entity;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -53,7 +54,7 @@ public class BookOrderItem implements Serializable {
     // 発送予定日
     @Column(name = "SHIPPING_DATE")
     @Temporal(TemporalType.TIMESTAMP)
-    private Calendar shippingDate;
+    private Date shippingDate;
     
     // 書籍
     @JoinColumn(name = "BOOK_ID")

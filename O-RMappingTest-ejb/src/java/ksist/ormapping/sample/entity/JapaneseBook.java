@@ -6,6 +6,7 @@
 package ksist.ormapping.sample.entity;
 
 import java.util.Calendar;
+import java.util.Date;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -23,13 +24,13 @@ public class JapaneseBook extends Book {
      * @return 在庫があれば当日、なければ５日後に発送する
      */
     @Override
-    public Calendar calcShippingDate() {
+    public Date calcShippingDate() {
         Calendar date = Calendar.getInstance();
         if (this.hasStock()) {
-            return date;
+            return date.getTime();
         } else {
             date.add(Calendar.DATE, 5);
-            return date;
+            return date.getTime();
         }
     }
 

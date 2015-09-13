@@ -7,6 +7,7 @@ package ksist.ormapping.sample.entity;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -59,7 +60,7 @@ public class BookOrder implements Serializable {
     // 注文日
     @Column(name = "ORDER_DATE")
     @Temporal(TemporalType.TIMESTAMP)
-    private Calendar orderDate;
+    private Date orderDate;
     
     // 注文明細
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)

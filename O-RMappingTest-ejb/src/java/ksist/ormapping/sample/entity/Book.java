@@ -7,6 +7,7 @@ package ksist.ormapping.sample.entity;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -67,8 +68,8 @@ public abstract class Book implements Serializable {
      * 発送を予約する
      * @return 発送予定日
      */
-    public Calendar reserveShipping() {
-        Calendar shippingDate = this.calcShippingDate();
+    public Date reserveShipping() {
+        Date shippingDate = this.calcShippingDate();
         if (this.hasStock()) {
             this.stockCount--;
         }
@@ -79,7 +80,7 @@ public abstract class Book implements Serializable {
      * 発送予定日を計算する（計算ロジックはサブクラス側で実装）
      * @return 発送予定日
      */
-    public abstract Calendar calcShippingDate();
+    public abstract Date calcShippingDate();
     
     /**
      * 書籍の種類を返す（サブクラス側で実装）
