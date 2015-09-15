@@ -21,7 +21,7 @@ import ksist.ormapping.sample.entity.Book;
  *
  * @author kasai
  */
-@WebServlet(urlPatterns = {"/bookOrderInput"})
+@WebServlet(name = "bookOrderInputServlet", urlPatterns = {"/bookOrderInput"})
 public class BookOrderInputServlet extends HttpServlet {
 
     @EJB
