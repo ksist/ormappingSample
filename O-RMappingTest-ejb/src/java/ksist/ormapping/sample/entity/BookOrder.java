@@ -6,7 +6,6 @@
 package ksist.ormapping.sample.entity;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -38,7 +37,10 @@ import lombok.Data;
 @Table(name = "BOOK_ORDER")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "BookOrder.findAll", query = "SELECT b FROM BookOrder b")
+    @NamedQuery(name = "BookOrder.findAll", query = "SELECT b FROM BookOrder b"),
+    @NamedQuery(name = "BookOrder.findByBookOrderId", query = "SELECT b FROM BookOrder b WHERE b.id = :id"),
+    @NamedQuery(name = "BookOrder.findByCustomerName", query = "SELECT b FROM BookOrder b WHERE b.customerName = :customerName"),
+    @NamedQuery(name = "BookOrder.customerList", query = "SELECT DISTINCT b.customerName FROM BookOrder b"),
 })
 
 @Data

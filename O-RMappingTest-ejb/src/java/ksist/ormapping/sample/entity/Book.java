@@ -6,7 +6,6 @@
 package ksist.ormapping.sample.entity;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
