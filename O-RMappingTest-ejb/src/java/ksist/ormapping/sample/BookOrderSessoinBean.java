@@ -13,6 +13,7 @@ import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import ksist.ormapping.sample.entity.Book;
 import ksist.ormapping.sample.entity.BookOrder;
 import ksist.ormapping.sample.entity.BookOrderItem;
@@ -28,6 +29,12 @@ public class BookOrderSessoinBean {
     @PersistenceContext
     EntityManager em;
     
+    /**
+     * 注文情報の登録
+     * @param customerName 注文者
+     * @param bookIDs 書籍IDのリスト
+     * @return 注文情報
+     */
     public BookOrder createBookOrder(String customerName, List<Integer> bookIDs) {
         BookOrder bookOrder = null;
                         
@@ -61,7 +68,37 @@ public class BookOrderSessoinBean {
         return bookOrder;
     }
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    /**
+     * 注文情報を取得
+     * @param bookOrderId 注文ID
+     * @return 注文情報
+     */
+    public BookOrder getBookOrder(int bookOrderId) {
+        Query query = em.createNamedQuery("BookOrder.findByBookOrderId");
+        query.setParameter("bookOrderId", bookOrderId);
+        return (BookOrder) query.getSingleResult();
+    }
+    
+    /**
+     * 注文者一覧を取得
+     * @return 注文者一覧
+     */
+    public List<String> getCustomerList() {
+        Query query = em.createNamedQuery("BookOrder.customerList", String.class);
+        List customerList = query.getResultList();
+        return customerList;
+    }
+    
+    /**
+     * 注文者名から注文一覧を取得
+     * @param customer 注文者名
+     * @return 注文一覧
+     */
+    public List<BookOrder> getOrderFromCustomer(String customer) {
+        Query query = em.createNamedQuery("BookOrder.findByCustomerName", BookOrder.class);
+        query.setParameter("customerName", customer);
+        List orderList = query.getResultList();
+        return orderList;
+    }
     
 }
