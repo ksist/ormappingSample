@@ -19,7 +19,7 @@ import ksist.ormapping.sample.BookSessionBean;
  *
  * @author kasai
  */
-@WebServlet(name = "DeleteBookServlet", urlPatterns = {"/deleteBook"})
+@WebServlet(urlPatterns = {"/deleteBook"})
 public class DeleteBookServlet extends HttpServlet {
 
     @EJB

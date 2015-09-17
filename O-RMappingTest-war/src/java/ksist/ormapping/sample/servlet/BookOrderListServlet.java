@@ -6,8 +6,6 @@
 package ksist.ormapping.sample.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -23,8 +21,8 @@ import ksist.ormapping.sample.entity.BookOrder;
  *
  * @author kasai
  */
-@WebServlet(urlPatterns = {"/bookOrder"})
-public class BookOrderServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/bookOrderList"})
+public class BookOrderListServlet extends HttpServlet {
 
     @EJB
     BookOrderSessoinBean bean;
@@ -42,18 +40,21 @@ public class BookOrderServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        String customerName = request.getParameter("customerName");
-        String bookList[] = request.getParameterValues("bookList");
-        List<Integer> bookIDs = new ArrayList<>();
-        for (String bookID : bookList) {
-            bookIDs.add(Integer.parseInt(bookID));
+        List<String> customerList = bean.getCustomerList();
+        request.setAttribute("customers", customerList);
+        
+        String index = request.getParameter("customerIndex");
+        int customerIndex;
+        if (index == null) {
+            customerIndex = 0;
+        } else {
+            customerIndex = Integer.parseInt(index);
         }
+        List<BookOrder> orderList = bean.getOrderFromCustomer(customerList.get(customerIndex));
+        request.setAttribute("id", customerIndex);
+        request.setAttribute("orderList", orderList);
         
-        BookOrder order = bean.createBookOrder(customerName, bookIDs);
-        
-        request.setAttribute("order", order);
-        
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/bookOrderFinish.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/bookOrderList.jsp");
         dispatcher.forward(request, response);
     }
 
