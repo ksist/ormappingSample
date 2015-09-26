@@ -24,13 +24,13 @@ public class ForeignBook extends Book {
      */
     @Override
     public Date calcShippingDate() {
-        Calendar today = Calendar.getInstance();
+        Calendar date = Calendar.getInstance();
         if (this.hasStock()) {
-            today.add(Calendar.DATE, 3);
-            return today.getTime();
+            date.add(Calendar.DATE, 3);
+            return date.getTime();
         } else {
-            today.add(Calendar.DATE, 7);
-            return today.getTime();
+            date.add(Calendar.DATE, 7);
+            return date.getTime();
         }
     }
 

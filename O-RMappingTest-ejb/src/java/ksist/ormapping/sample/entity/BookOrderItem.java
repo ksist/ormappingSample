@@ -33,11 +33,6 @@ import lombok.Data;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "BookOrderItem.findAll", query = "SELECT b FROM BookOrderItem b"),
-//    @NamedQuery(name = "BookOrderItem.findByBookOrderItemId", query = "SELECT b FROM BookOrderItem b WHERE b.id = :id"),
-//    @NamedQuery(name = "BookOrderItem.findByBookOrderId", query = "SELECT b FROM BookOrderItem b WHERE b.bookOrderId = :bookOrderId"),
-//    @NamedQuery(name = "BookOrderItem.findByItemOrder", query = "SELECT b FROM BookOrderItem b WHERE b.itemOrder = :itemOrder"),
-//    @NamedQuery(name = "BookOrderItem.findByBookId", query = "SELECT b FROM BookOrderItem b WHERE b.bookId = :bookId"),
-//    @NamedQuery(name = "BookOrderItem.findByShippingDate", query = "SELECT b FROM BookOrderItem b WHERE b.shippingDate = :shippingDate")
 })
 
 public class BookOrderItem implements Serializable {
