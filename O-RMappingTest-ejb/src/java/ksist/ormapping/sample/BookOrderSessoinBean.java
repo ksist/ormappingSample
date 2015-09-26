@@ -75,7 +75,7 @@ public class BookOrderSessoinBean {
      */
     public BookOrder getBookOrder(int bookOrderId) {
         Query query = em.createNamedQuery("BookOrder.findByBookOrderId");
-        query.setParameter("bookOrderId", bookOrderId);
+        query.setParameter("id", bookOrderId);
         return (BookOrder) query.getSingleResult();
     }
     

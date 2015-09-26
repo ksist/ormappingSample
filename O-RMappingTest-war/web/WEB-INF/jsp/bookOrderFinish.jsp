@@ -28,7 +28,7 @@
                 </tr>
                 <tr>
                     <td>注文日時：</td>
-                    <td><fmt:formatDate value="${order.orderDate}" type="date" dateStyle="medium" /></td>
+                    <td><fmt:formatDate value="${order.orderDate}" type="both" dateStyle="medium" /></td>
                 </tr>
             </table>
         </div>
