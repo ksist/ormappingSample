@@ -26,7 +26,6 @@
             <c:forEach items="${books}" var="book">
                 <tr>
                 <td>
-                    <a href="">編集</a>
                     <form action="deleteBook" method="POST">
                         <input type="submit" value="削除" />
                         <input type="hidden" name="bookId" value="${book.id}" />
